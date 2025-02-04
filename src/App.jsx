@@ -13,7 +13,7 @@ const App = () => {
           <p>Release Year: 2023</p>
           <p>Rating: 8.5/10</p>
         </div>
-        <div class="movie-card">
+        <div className="movie-card">
           <h2>Movie Title 2</h2>
           <p>Release Year: 2022</p>
           <p>Rating: 7.9/10</p>
