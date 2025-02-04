@@ -1,9 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-/* Add any custom styles here */
-
+/* Reset and base styles */
 * {
   margin: 0;
   padding: 0;
@@ -16,6 +11,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Custom scrollbar styles */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
