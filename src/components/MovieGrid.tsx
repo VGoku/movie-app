@@ -1,5 +1,7 @@
-import { Grid, Box, CircularProgress } from '@mui/material';
+import { Grid } from '@mui/material';
 import MovieCard from './MovieCard';
+import MovieSkeleton from './MovieSkeleton';
+import ErrorMessage from './ErrorMessage';
 
 interface Movie {
     imdbID: string;
@@ -13,32 +15,28 @@ interface MovieGridProps {
     movies: Movie[];
     loading?: boolean;
     error?: Error | null;
+    onRetry?: () => void;
 }
 
-const MovieGrid = ({ movies, loading = false, error = null }: MovieGridProps) => {
-    if (loading) {
-        return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
-                <CircularProgress />
-            </Box>
-        );
+const MovieGrid = ({ movies, loading = false, error = null, onRetry }: MovieGridProps) => {
+    if (error) {
+        return <ErrorMessage message={error.message} onRetry={onRetry} />;
     }
 
-    if (error) {
-        return (
-            <Box display="flex" justifyContent="center" alignItems="center" minHeight="50vh">
-                <p>Error loading movies: {error.message}</p>
-            </Box>
-        );
-    }
+    // Filter only by valid imdbID, letting MovieCard handle poster fallback
+    const validMovies = movies.filter((movie) => movie.imdbID);
 
     return (
         <Grid container spacing={3} padding={3}>
-            {movies.map((movie) => (
-                <Grid item key={movie.imdbID} xs={12} sm={6} md={4} lg={3}>
-                    <MovieCard movie={movie} />
-                </Grid>
-            ))}
+            {loading ? (
+                <MovieSkeleton />
+            ) : (
+                validMovies.map((movie) => (
+                    <Grid item key={movie.imdbID} xs={12} sm={6} md={4} lg={3}>
+                        <MovieCard movie={movie} />
+                    </Grid>
+                ))
+            )}
         </Grid>
     );
 };

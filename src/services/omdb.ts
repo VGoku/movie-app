@@ -16,13 +16,14 @@ const axiosInstance = axios.create({
 // API methods
 export const omdbApi = {
     // Search movies
-    searchMovies: (query: string, page = 1) =>
+    searchMovies: (query: string, page = 1, year?: string) =>
         axiosInstance.get('/', {
             params: {
                 apikey: API_KEY,
                 s: query,
                 type: 'movie',
                 page,
+                y: year || undefined,
             },
         }),
 
@@ -36,15 +37,14 @@ export const omdbApi = {
             },
         }),
 
-    // Get popular movies (since OMDb doesn't have this endpoint, we'll search for common words)
+    // Get popular movies (since OMDb doesn't have this endpoint, we'll search for popular movies using a keyword)
     getPopular: (page = 1) =>
         axiosInstance.get('/', {
             params: {
                 apikey: API_KEY,
-                s: 'love', // We can change this to get different movies
+                s: 'avengers', // Popular movie keyword updated
                 type: 'movie',
-                page,
-                y: new Date().getFullYear(), // Current year for newer movies
+                page
             },
         }),
 

@@ -9,7 +9,7 @@ const Movies = () => {
   const [tab, setTab] = useState<'popular' | 'top_rated'>('popular');
   const [page, setPage] = useState(1);
 
-  const { data, isLoading, error } = useQuery({
+  const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['movies', tab, page],
     queryFn: () => tab === 'popular' ? omdbApi.getPopular(page) : omdbApi.getTopRated(page),
     keepPreviousData: true,
@@ -51,6 +51,7 @@ const Movies = () => {
           movies={movies}
           loading={isLoading}
           error={error as Error}
+          onRetry={() => refetch()}
         />
 
         {!isLoading && !error && movies.length > 0 && (

@@ -4,7 +4,8 @@ import {
   createBrowserRouter,
   RouterProvider,
   createRoutesFromElements,
-  Route
+  Route,
+  Navigate
 } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider, CssBaseline } from '@mui/material'
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
       <Route path="movies" element={<Movies />} />
       <Route path="movie/:id" element={<MovieDetail />} />
       <Route path="search" element={<Search />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Route>
   ),
   {
