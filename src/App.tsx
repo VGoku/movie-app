@@ -6,11 +6,11 @@ import Movies from './pages/Movies';
 import MovieDetail from './pages/MovieDetail';
 import Search from './pages/Search';
 
-function App() {
+const App = () => {
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: 'background.default' }}>
+    <Box sx={{ minHeight: '100vh', backgroundColor: 'background.default' }}>
       <Navbar />
-      <Box component="main" sx={{ pt: 8, pb: 6 }}>
+      <Box component="main" sx={{ pt: 8 }}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/movies" element={<Movies />} />
@@ -20,6 +20,6 @@ function App() {
       </Box>
     </Box>
   );
-}
+};
 
 export default App; 

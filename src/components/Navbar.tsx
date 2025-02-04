@@ -60,6 +60,7 @@ const Navbar = () => {
   const handleSearch = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && searchQuery.trim()) {
       navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+      setSearchQuery('');
     }
   };
 
@@ -75,6 +76,7 @@ const Navbar = () => {
         >
           <MovieIcon />
         </IconButton>
+
         <Typography
           variant="h6"
           noWrap
@@ -87,33 +89,31 @@ const Navbar = () => {
             color: 'inherit',
           }}
         >
-          MovieFlix
+          Movie App
         </Typography>
-        <Box sx={{ display: 'flex', gap: 2 }}>
+
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' }, gap: 2 }}>
           <Typography
             component={Link}
             to="/movies"
-            sx={{
-              textDecoration: 'none',
-              color: 'inherit',
-              display: 'flex',
-              alignItems: 'center',
-            }}
+            sx={{ textDecoration: 'none', color: 'inherit' }}
           >
             Movies
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              onKeyPress={handleSearch}
-            />
-          </Search>
         </Box>
+
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Search…"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyPress={handleSearch}
+            inputProps={{ 'aria-label': 'search' }}
+          />
+        </Search>
       </Toolbar>
     </AppBar>
   );
